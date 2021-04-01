@@ -6,9 +6,13 @@ const users_id = require('./users_ids');
 const situations_id = require('./situations_ids');
 const overtime = require('./overtime');
 const operations = require('./insert_update');
+const register_original = require('./registers');
 const job = async ()=>{
     //OBTENIENDO EL ULTIMO REGISTRO
     var last_register = await querys.last_assist();
+    //
+    // var originals = register_original.test();
+    // var registers = originals.filter((register)=>register.userSn > last_register);
     //OBTENIENDO LA LISTA DE REGISTROS Y FILTRANDO POR EL ULTIMO REGISTRO
     var registers = list_assists.filter((register)=>register.userSn > last_register);
     //VERIFICAR SI HAY REGISTROS
