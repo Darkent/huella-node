@@ -66,7 +66,7 @@ exports.list_assists = [
      {
       userSn: 8,
       deviceUserId: '13',
-      //29 16:06 PM //departure_morning
+      //29 16:06 PM //departure_afternoon
       recordTime: '2021-03-27T21:06:00.000Z',
       name: 'test',
       type: 'Check-out'
@@ -84,6 +84,14 @@ exports.list_assists = [
       deviceUserId: '13',
       //29 11:06 AM //departure_morning
       recordTime: '2021-03-27T16:06:00.000Z',
+      name: 'test',
+      type: 'Check-out'
+    },
+    {
+      userSn: 11,
+      deviceUserId: '47',
+      //29 11:06 AM //departure_morning
+      recordTime: '2021-03-27T13:45:00.000Z',
       name: 'test',
       type: 'Check-out'
     },

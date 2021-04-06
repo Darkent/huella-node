@@ -5,6 +5,8 @@ app.listen(5000,()=>{
     console.log("El servidor esta corriendo");
 });
 
-job.job()
+
+
+job.job("asistencia")
 
 

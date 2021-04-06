@@ -37,7 +37,7 @@ function add_fields(registers){
 
         delete register.userSn;
    
-        delete register.type;
+       
     }
 }
  function property_is(register){

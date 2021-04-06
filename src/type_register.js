@@ -1,11 +1,14 @@
 const utils = require('./utils');
 
 function type_register(registers,times){
-    var entry_limit = times.departure_morning;
-    var departure_limit = times.entry_afternoon;
+   
  
     for(var i = 0 ; i < registers.length ; i ++){
+        // var entry_limit = times.departure_morning;
+        // var departure_limit = times.entry_afternoon;
         let register = registers[i];
+        let entry_limit = times.filter((time)=>time.user_type == register.type_user.toString())[0].departure_morning;
+        let departure_limit  =  times.filter((time)=>time.user_type == register.type_user.toString())[0].entry_afternoon;
         let register_recordTime = new Date(register.recordTime);
 
         if(register.type == "Check-in"){

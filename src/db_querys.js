@@ -1,6 +1,19 @@
 const connection = require("./db_connection")
-
-
+const mysql = require('mysql');
+exports.test = ()=>{
+    return new Promise((resolve,reject)=>{ 
+    let query = `SELECT * FROM assists WHERE id=(SELECT max(id) FROM assists)`;
+    connection.query(query,(err,rows)=>{
+        if(err)  reject(err);
+  
+     if(rows.length == 0){
+        resolve(0);
+     }else{
+         resolve(rows[0].uid)
+     }
+         });
+    });
+}
 
 exports.last_assist = ()=>{
     return new Promise((resolve,reject)=>{ 
@@ -29,6 +42,16 @@ exports.get_user_id = (deviceUserId)=>{
 
 }
 
+exports.get_type_user = (deviceUserId)=>{
+    return new Promise((resolve,reject)=>{
+        let query = `SELECT user_type FROM users WHERE uid=${deviceUserId}`;
+
+        connection.query(query,(err,rows)=>{
+            if(err) reject(err);
+            resolve(rows[0].user_type)
+        })
+    })
+}
 
 exports.get_situation_id = (personal_id)=>{
     return new Promise((resolve,reject)=>{
@@ -50,17 +73,9 @@ exports.get_schedule = ()=>{
     let query = 'SELECT * FROM setting';
     connection.query(query,(err,rows)=>{
         if(err)  reject(err);
-        var x = rows[0];
-        let times = {
-            entry_morning : x.entry_time_tomorrow,
-            departure_morning: x.departure_time_tomorrow,
-            //HORA CLAVE
-            entry_afternoon:x.entry_time_late,
-            departure_afternoon:x.departure_time_late,
-            minutes:x.late_minutes
-        }
+        var x = [...rows];
     
-     resolve(times)
+        resolve(x)
         
     });
   
@@ -114,4 +129,10 @@ exports.property_filled = async(property,id)=>{
         })
     })
     
+}
+exports.close_connection = async()=>{
+    connection.end((err)=>{
+        if(err)throw err;
+        console.log("Conexión cerrada");
+    })
 }

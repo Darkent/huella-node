@@ -1,9 +1,17 @@
 const utils = require('./utils');
 
-function check_overtime(registers, time){
+function check_overtime(registers, times){
    
     for(var i = 0 ; i < registers.length ; i ++){
         let register = registers[i];
+        let type_times = times.filter((time)=>time.user_type == register.type_user.toString())[0];
+        let time = {
+            entry_morning:type_times.entry_morning,
+            departure_morning :type_times.departure_morning,
+            entry_afternoon:type_times.entry_afternoon,
+            departure_afternoon:type_times.departure_afternoon,
+            minutes:type_times.overtime_minutes
+        }
         if(register.hasOwnProperty('entry_morning')){
           let check_overtime =   is_overtime(time.entry_morning,register.entry_morning,time.minutes)
           let property = check_overtime ? "tarde":"hora";
@@ -22,6 +30,7 @@ function check_overtime(registers, time){
         delete register.recordTime;
         delete register.deviceUserId;
         delete register.name;
+        delete register.type;
     }
     
 
